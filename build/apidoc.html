@@ -1,0 +1,422 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/luthraG/image-watermark"
+
+    >image-watermark (v0.0.7)</a>
+</h1>
+<h4>A powerful watermark library for image and pdf files based on ImageMagick for node.js</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.image-watermark">module image-watermark</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.image-watermark.embedWatermark">
+            function <span class="apidocSignatureSpan">image-watermark.</span>embedWatermark
+            <span class="apidocSignatureSpan">(source, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.image-watermark.embedWatermarkWithCb">
+            function <span class="apidocSignatureSpan">image-watermark.</span>embedWatermarkWithCb
+            <span class="apidocSignatureSpan">(source, options, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">image-watermark.</span>version</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.image-watermark.embedWatermark">module image-watermark.embedWatermark</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.image-watermark.embedWatermark.embedWatermark">
+            function <span class="apidocSignatureSpan">image-watermark.</span>embedWatermark
+            <span class="apidocSignatureSpan">(source, options)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.image-watermark.embedWatermarkWithCb">module image-watermark.embedWatermarkWithCb</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.image-watermark.embedWatermarkWithCb.embedWatermarkWithCb">
+            function <span class="apidocSignatureSpan">image-watermark.</span>embedWatermarkWithCb
+            <span class="apidocSignatureSpan">(source, options, callback)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.image-watermark" id="apidoc.module.image-watermark">module image-watermark</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.image-watermark.embedWatermark" id="apidoc.element.image-watermark.embedWatermark">
+        function <span class="apidocSignatureSpan">image-watermark.</span>embedWatermark
+        <span class="apidocSignatureSpan">(source, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function embedWatermark(source, options) {
+
+	if (!source || source == &#x27;&#x27;)
+		throw new Error(&#x27;Image-Watermark::embedWatermark : Specified an invalid image source&#x27;);
+
+	// Check if file exists at the specified path
+	stats = fs.lstatSync(source);
+
+	if (!stats.isFile())
+		throw new Error(&#x27;Image-Watermark::embedWatermark : Image does not exists at : &#x27; + source);		
+
+	// If options are not properly specified, use default options
+	if (!options || typeof options !== &#x27;object&#x27;)
+		options = defaultOptions;
+
+	// If we reach here that means file exists
+	im.identify(source, function (err, imageData) {
+	  if (err)
+	  	throw new Error(&#x27;Image-Watermark::embedWatermark : Unable to process image file : &#x27; + err);
+
+	  var retObj = _parseOptions(imageData, source, options);
+
+	  im.convert(retObj.args, function(err, stdout) {
+	  	if (err)
+	    	console.log(&#x27;Image-Watermark::embedWatermark : Error in applying watermark : &#x27; + err);
+	    else
+	      	console.log(&#x27;Image-Watermark::embedWatermark : Successfully applied watermark. Please check it at :\n &#x27; + retObj.outputPath
+);
+	  });
+	});
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+	&#x27;npm install image-watermark&#x27;
+
+### Server-side usage
+
+```javascript
+var watermark = require(&#x27;image-watermark&#x27;);
+
+watermark.<span class="apidocCodeKeywordSpan">embedWatermark</span>(&#x27;/path/to/image_or_pdf/file&#x27;, [options]);
+```
+
+### Clone the repo
+
+git clone https://github.com/luthraG/image-watermark.git
+
+### API
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.image-watermark.embedWatermarkWithCb" id="apidoc.element.image-watermark.embedWatermarkWithCb">
+        function <span class="apidocSignatureSpan">image-watermark.</span>embedWatermarkWithCb
+        <span class="apidocSignatureSpan">(source, options, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function embedWatermarkWithCb(source, options, callback) {
+
+	var error;
+	
+	if ((arguments.length &#x3c; 2) ||
+		(arguments.length === 2 &#x26;&#x26; !ratify.isFunction(arguments[1])) ||
+		(arguments.length &#x3e; 2 &#x26;&#x26; !ratify.isFunction(arguments[2]))) {
+		throw new Error(&#x27;Image-Watermark::embedWatermarkWithCb : Invalid arguments to method embedWatermarkWithCb&#x27;);
+	} else if (arguments.length === 2 &#x26;&#x26; ratify.isFunction(arguments[1])) {
+		callback = arguments[1];
+		options = null;
+	}
+
+	if (!source || source == &#x27;&#x27;) {
+		error = new Error(&#x27;Image-Watermark::embedWatermarkWithCb : Specified an invalid image source&#x27;);
+		return callback(error);
+	}
+
+	// Check if file exists at the specified path
+	fs.lstat(source, function(err, stats) {
+		if (err || !stats.isFile()) {
+			error = new Error(&#x27;Image-Watermark::embedWatermarkWithCb : Image file doesn\&#x27;t exists at &#x27; + source);
+			return callback(error);
+		} else if (!err) {
+
+			// If options are not properly specified, use default options
+			if (!options || typeof options !== &#x27;object&#x27;)
+				options = defaultOptions;
+
+			// If we reach here that means file exists
+			im.identify(source, function (err, imageData) {
+				if (err) {
+			  		error = new Error(&#x27;Image-Watermark::embedWatermarkWithCb : Unable to process image file : &#x27; + err);
+			  		return callback(error);
+			  	}
+
+			  	var retObj = _parseOptions(imageData, source, options);
+
+		        im.convert(retObj.args, function(err, stdout) {
+		            if (err) {
+		            	error = new Error(&#x27;Image-Watermark::embedWatermarkWithCb : Error in applying watermark : &#x27; + err);
+		            	return callback(error);
+		            } else {
+		            	console.log(&#x27;Image-Watermark::embedWatermarkWithCb : Successfully applied watermark. Please check it at :\n &#x27; + retObj
+.outputPath);
+		            	return callback(null);
+		            }
+		        });
+			});
+		}
+	});
+	
+	return;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```javascript
+
+// Embed watermark with option object and callback method
+var watermark = require(&#x27;image-watermark&#x27;);
+var option = {&#x27;text&#x27; : &#x27;sample watermark&#x27;};
+
+watermark.<span class="apidocCodeKeywordSpan">embedWatermarkWithCb</span>(&#x27;\home\user\sample.jpg&#x27;, option, function(err
+) {
+	if (!err)
+		console.log(&#x27;Succefully embeded watermark&#x27;);
+});
+
+// Embed watermark with no option object and callback method
+var watermark = require(&#x27;image-watermark&#x27;);
+...</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.image-watermark.embedWatermark" id="apidoc.module.image-watermark.embedWatermark">module image-watermark.embedWatermark</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.image-watermark.embedWatermark.embedWatermark" id="apidoc.element.image-watermark.embedWatermark.embedWatermark">
+        function <span class="apidocSignatureSpan">image-watermark.</span>embedWatermark
+        <span class="apidocSignatureSpan">(source, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function embedWatermark(source, options) {
+
+	if (!source || source == &#x27;&#x27;)
+		throw new Error(&#x27;Image-Watermark::embedWatermark : Specified an invalid image source&#x27;);
+
+	// Check if file exists at the specified path
+	stats = fs.lstatSync(source);
+
+	if (!stats.isFile())
+		throw new Error(&#x27;Image-Watermark::embedWatermark : Image does not exists at : &#x27; + source);		
+
+	// If options are not properly specified, use default options
+	if (!options || typeof options !== &#x27;object&#x27;)
+		options = defaultOptions;
+
+	// If we reach here that means file exists
+	im.identify(source, function (err, imageData) {
+	  if (err)
+	  	throw new Error(&#x27;Image-Watermark::embedWatermark : Unable to process image file : &#x27; + err);
+
+	  var retObj = _parseOptions(imageData, source, options);
+
+	  im.convert(retObj.args, function(err, stdout) {
+	  	if (err)
+	    	console.log(&#x27;Image-Watermark::embedWatermark : Error in applying watermark : &#x27; + err);
+	    else
+	      	console.log(&#x27;Image-Watermark::embedWatermark : Successfully applied watermark. Please check it at :\n &#x27; + retObj.outputPath
+);
+	  });
+	});
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+	&#x27;npm install image-watermark&#x27;
+
+### Server-side usage
+
+```javascript
+var watermark = require(&#x27;image-watermark&#x27;);
+
+watermark.<span class="apidocCodeKeywordSpan">embedWatermark</span>(&#x27;/path/to/image_or_pdf/file&#x27;, [options]);
+```
+
+### Clone the repo
+
+git clone https://github.com/luthraG/image-watermark.git
+
+### API
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.image-watermark.embedWatermarkWithCb" id="apidoc.module.image-watermark.embedWatermarkWithCb">module image-watermark.embedWatermarkWithCb</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.image-watermark.embedWatermarkWithCb.embedWatermarkWithCb" id="apidoc.element.image-watermark.embedWatermarkWithCb.embedWatermarkWithCb">
+        function <span class="apidocSignatureSpan">image-watermark.</span>embedWatermarkWithCb
+        <span class="apidocSignatureSpan">(source, options, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function embedWatermarkWithCb(source, options, callback) {
+
+	var error;
+	
+	if ((arguments.length &#x3c; 2) ||
+		(arguments.length === 2 &#x26;&#x26; !ratify.isFunction(arguments[1])) ||
+		(arguments.length &#x3e; 2 &#x26;&#x26; !ratify.isFunction(arguments[2]))) {
+		throw new Error(&#x27;Image-Watermark::embedWatermarkWithCb : Invalid arguments to method embedWatermarkWithCb&#x27;);
+	} else if (arguments.length === 2 &#x26;&#x26; ratify.isFunction(arguments[1])) {
+		callback = arguments[1];
+		options = null;
+	}
+
+	if (!source || source == &#x27;&#x27;) {
+		error = new Error(&#x27;Image-Watermark::embedWatermarkWithCb : Specified an invalid image source&#x27;);
+		return callback(error);
+	}
+
+	// Check if file exists at the specified path
+	fs.lstat(source, function(err, stats) {
+		if (err || !stats.isFile()) {
+			error = new Error(&#x27;Image-Watermark::embedWatermarkWithCb : Image file doesn\&#x27;t exists at &#x27; + source);
+			return callback(error);
+		} else if (!err) {
+
+			// If options are not properly specified, use default options
+			if (!options || typeof options !== &#x27;object&#x27;)
+				options = defaultOptions;
+
+			// If we reach here that means file exists
+			im.identify(source, function (err, imageData) {
+				if (err) {
+			  		error = new Error(&#x27;Image-Watermark::embedWatermarkWithCb : Unable to process image file : &#x27; + err);
+			  		return callback(error);
+			  	}
+
+			  	var retObj = _parseOptions(imageData, source, options);
+
+		        im.convert(retObj.args, function(err, stdout) {
+		            if (err) {
+		            	error = new Error(&#x27;Image-Watermark::embedWatermarkWithCb : Error in applying watermark : &#x27; + err);
+		            	return callback(error);
+		            } else {
+		            	console.log(&#x27;Image-Watermark::embedWatermarkWithCb : Successfully applied watermark. Please check it at :\n &#x27; + retObj
+.outputPath);
+		            	return callback(null);
+		            }
+		        });
+			});
+		}
+	});
+	
+	return;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```javascript
+
+// Embed watermark with option object and callback method
+var watermark = require(&#x27;image-watermark&#x27;);
+var option = {&#x27;text&#x27; : &#x27;sample watermark&#x27;};
+
+watermark.<span class="apidocCodeKeywordSpan">embedWatermarkWithCb</span>(&#x27;\home\user\sample.jpg&#x27;, option, function(err
+) {
+	if (!err)
+		console.log(&#x27;Succefully embeded watermark&#x27;);
+});
+
+// Embed watermark with no option object and callback method
+var watermark = require(&#x27;image-watermark&#x27;);
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
