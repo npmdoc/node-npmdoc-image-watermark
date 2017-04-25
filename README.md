@@ -1,4 +1,7 @@
-# api documentation for  [image-watermark (v0.0.7)](https://github.com/luthraG/image-watermark)  [![npm package](https://img.shields.io/npm/v/npmdoc-image-watermark.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-image-watermark) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-image-watermark.svg)](https://travis-ci.org/npmdoc/node-npmdoc-image-watermark)
+# npmdoc-image-watermark
+
+#### basic api documentation for  [image-watermark (v0.0.7)](https://github.com/luthraG/image-watermark)  [![npm package](https://img.shields.io/npm/v/npmdoc-image-watermark.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-image-watermark) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-image-watermark.svg)](https://travis-ci.org/npmdoc/node-npmdoc-image-watermark)
+
 #### A powerful watermark library for image and pdf files based on ImageMagick for node.js
 
 [![NPM](https://nodei.co/npm/image-watermark.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/image-watermark)
@@ -58,7 +61,8 @@
         "url": "git+https://github.com/luthraG/image-watermark.git"
     },
     "scripts": {},
-    "version": "0.0.7"
+    "version": "0.0.7",
+    "bin": {}
 }
 ```
 

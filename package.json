@@ -1,6 +1,6 @@
 {
     "author": "kai zhu <kaizhu256@gmail.com>",
-    "description": "api documentation for [image-watermark (v0.0.7)](https://github.com/luthraG/image-watermark) [![npm package](https://img.shields.io/npm/v/npmdoc-image-watermark.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-image-watermark) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-image-watermark.svg)](https://travis-ci.org/npmdoc/node-npmdoc-image-watermark)",
+    "description": "#### basic api documentation for  [image-watermark (v0.0.7)](https://github.com/luthraG/image-watermark)  [![npm package](https://img.shields.io/npm/v/npmdoc-image-watermark.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-image-watermark) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-image-watermark.svg)](https://travis-ci.org/npmdoc/node-npmdoc-image-watermark)",
     "devDependencies": {
         "electron-lite": "kaizhu256/node-electron-lite#alpha",
         "image-watermark": "*",
@@ -35,5 +35,5 @@
         "start": "(set -e; export PORT=${PORT:-8080}; utility2 start test.js)",
         "test": "(set -e; export PORT=$(utility2 shServerPortRandom); utility2 test test.js)"
     },
-    "version": "0.0.1"
+    "version": "2017.4.26"
 }
